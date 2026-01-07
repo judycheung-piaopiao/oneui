@@ -1,4 +1,4 @@
-# AG Tools Catalogue - Document Search Setup
+# ONE UI - Document Search Setup
 
 ## ✅ Phase 1 Complete: Basic RAG Implementation
 

@@ -1,33 +1,16 @@
-import { Box, Container, Typography, Paper } from '@mui/material';
-import { useEffect } from 'react';
+import { Box, Container, Typography, Paper, Button } from '@mui/material';
+import { Google } from '@mui/icons-material';
 
 interface LoginPageProps {
   onLoginSuccess: (token: string) => void;
 }
 
-export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      const data = event.data || {};
-      
-      // Handle Google login response
-      if (data.type === 'googleLogin' && data.token) {
-        localStorage.setItem('access_token', data.token);
-        onLoginSuccess(data.token);
-      }
-      
-      // Handle regular login response
-      if (data.access_token) {
-        localStorage.setItem('access_token', data.access_token);
-        onLoginSuccess(data.access_token);
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [onLoginSuccess]);
-
-  const googleLoginUrl = 'https://microfrontends.alpha-grep.com/googlelogin';
+export default function LoginPage(_props: LoginPageProps) {
+  const handleGoogleLogin = () => {
+    // Direct redirect to our own backend Google OAuth endpoint
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8889';
+    window.location.href = `${apiBaseUrl}/auth/google/login`;
+  };
 
   return (
     <Box
@@ -36,7 +19,7 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        bgcolor: 'background.default',
+        background: 'linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%)',
       }}
     >
       <Container maxWidth="sm">
@@ -48,33 +31,49 @@ export default function LoginPage({ onLoginSuccess }: LoginPageProps) {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 3,
+            backgroundColor: 'rgba(10, 14, 39, 0.8)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(0, 212, 255, 0.2)',
           }}
         >
-          <Typography variant="h4" component="h1" gutterBottom>
-            AG Tools Catalogue
+          <Typography 
+            variant="h4" 
+            component="h1" 
+            gutterBottom
+            sx={{
+              background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 700,
+            }}
+          >
+            ONE UI
           </Typography>
-          <Typography variant="body1" color="text.secondary" align="center">
+          <Typography variant="body1" sx={{ color: 'rgba(255, 255, 255, 0.7)' }} align="center">
             Please sign in with your company Google account
           </Typography>
 
-          <Box
+          <Button
+            variant="contained"
+            startIcon={<Google />}
+            onClick={handleGoogleLogin}
             sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
+              mt: 2,
+              py: 1.5,
+              px: 4,
+              background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+              color: '#0a0e27',
+              fontWeight: 600,
+              fontSize: '1rem',
+              '&:hover': {
+                boxShadow: '0 6px 25px rgba(0, 212, 255, 0.6)',
+                transform: 'translateY(-2px)',
+              },
             }}
           >
-            <iframe
-              src={googleLoginUrl}
-              style={{
-                border: 'none',
-                width: '100%',
-                height: '60px',
-                overflow: 'hidden',
-              }}
-              title="Google Login"
-            />
-          </Box>
+            Sign in with Google
+          </Button>
         </Paper>
       </Container>
     </Box>

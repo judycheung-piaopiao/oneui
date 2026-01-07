@@ -1,6 +1,6 @@
-# AG Tools Catalogue - Backend
+# ONE UI - Backend
 
-FastAPI backend for the AG Tools Catalogue application.
+FastAPI backend for the ONE UI application.
 
 ## Features
 

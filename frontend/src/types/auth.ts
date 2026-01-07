@@ -10,18 +10,21 @@ export interface User {
   accessList?: Record<string, string[]>;
 }
 
-export enum RoleName {
-  ADMIN = "ADMIN",
-  SUPER_ADMIN = "SUPER_ADMIN",
-  MODERATOR = "MODERATOR",
-  TEAM_OWNER = "TEAM_OWNER",
-  TEAM_MEMBER = "TEAM_MEMBER",
-}
+export const RoleName = {
+  ADMIN: "ADMIN",
+  SUPER_ADMIN: "SUPER_ADMIN",
+  MODERATOR: "MODERATOR",
+  TEAM_OWNER: "TEAM_OWNER",
+  TEAM_MEMBER: "TEAM_MEMBER",
+} as const;
+
+export type RoleName = typeof RoleName[keyof typeof RoleName];
 
 export function isAdminRole(role: string): boolean {
-  return [
+  const adminRoles = [
     RoleName.ADMIN,
     RoleName.SUPER_ADMIN,
     RoleName.MODERATOR,
-  ].includes(role as RoleName);
+  ];
+  return adminRoles.includes(role as any);
 }

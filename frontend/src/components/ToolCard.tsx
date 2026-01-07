@@ -1,5 +1,5 @@
-import { Card, CardContent, CardActions, Typography, Chip, Button, Box, Stack, Alert } from '@mui/material';
-import { OpenInNew, MenuBook, Description } from '@mui/icons-material';
+import { Card, CardContent, CardActions, Typography, Chip, Button, Box, Stack } from '@mui/material';
+import { OpenInNew, MenuBook } from '@mui/icons-material';
 import type { Tool } from '../types';
 
 interface ToolCardProps {

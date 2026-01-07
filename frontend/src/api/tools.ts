@@ -93,3 +93,13 @@ export const docSearch = async (query: string, limit: number = 10): Promise<any>
   });
   return response.data;
 };
+
+export const checkIsAdmin = async (): Promise<boolean> => {
+  try {
+    const response = await api.get('/api/admins/is-admin');
+    return response.data.is_admin;
+  } catch (error) {
+    console.error('Failed to check admin status:', error);
+    return false;
+  }
+};

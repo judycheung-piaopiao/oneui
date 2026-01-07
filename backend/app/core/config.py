@@ -14,11 +14,15 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
+        "http://localhost:4173",
+        "http://localhost:4174",
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:5175",
         "http://localhost:5176",
         "http://localhost:5177",
+        "http://10.40.1.65:4173",
+        "http://10.40.1.65:4174",
         "http://10.40.1.65:5173",
         "http://10.40.1.65:5174",
         "http://10.40.1.65:5175",
@@ -28,10 +32,17 @@ class Settings(BaseSettings):
     ]
     
     # Authentication
-    ACCESS_VERIFY_TOKEN_URL: str = "http://localhost:3000/user/verifyToken"
+    ACCESS_API_BASE_URL: str = "http://10.40.1.53:8080"
+    ACCESS_VERIFY_TOKEN_URL: str = "http://10.40.1.53:8080/user/verifyToken"
+    ACCESS_USER_INFO_URL: str = "http://10.40.1.53:8080/user-accesslist"
     DEV_MODE: bool = False  # Set to True to bypass authentication for development
     DEV_USER_EMAIL: str = "dev@example.com"
     DEV_USER_ROLE: str = "ADMIN"
+    
+    # Google OAuth (same client ID as devops_gui)
+    GOOGLE_CLIENT_ID: str = "465254338205-idp8ai2mog0jj6fn9f6pu5dlq5mqgopa.apps.googleusercontent.com"
+    GOOGLE_CLIENT_SECRET: str = ""  # Get from environment variable for security
+    FRONTEND_URL: str = "http://localhost:5175"  # Will be overridden by environment
     
     # Data storage
     DATA_DIR: str = "data"

@@ -2,7 +2,6 @@ import {
   FormControl, 
   Select, 
   MenuItem, 
-  Chip, 
   Box,
   OutlinedInput,
   Checkbox,
@@ -21,7 +20,7 @@ export default function FilterSidebar({ tags, selectedTags, onTagToggle }: Filte
     const newTags = typeof value === 'string' ? value.split(',') : value;
     
     // Find which tag was added or removed
-    const added = newTags.find(tag => !selectedTags.includes(tag));
+    const added = newTags.find((tag: string) => !selectedTags.includes(tag));
     const removed = selectedTags.find(tag => !newTags.includes(tag));
     
     if (added) {
