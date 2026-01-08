@@ -39,10 +39,10 @@ async def ai_search(
     AI-powered semantic search
     
     Examples:
-    - "trading tools" - finds trading-related tools
-    - "监控系统" - finds monitoring tools (Chinese)
-    - "HR management" - finds HR tools
-    - "devops dashboard" - finds DevOps tools
+    - "trading tools"
+    - "monitoring system"
+    - "HR management"
+    - "devops dashboard"
     """
     # Get all tools
     all_tools = await storage.get_all_tools()

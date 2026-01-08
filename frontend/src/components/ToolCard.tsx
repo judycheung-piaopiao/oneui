@@ -19,6 +19,29 @@ export default function ToolCard({ tool }: ToolCardProps) {
     return { content: icon, isImage: false };
   };
 
+  // Get token and append to tool link for SSO
+  const getToolLinkWithToken = (link: string) => {
+    // ag-ui-components stores token in cookie with name 'ag_token'
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      return null;
+    };
+    
+    const token = getCookie('ag_token') || localStorage.getItem('ag_token') || localStorage.getItem('access_token');
+    if (!token) return link;
+    
+    try {
+      const url = new URL(link);
+      url.searchParams.set('ag-token', token);
+      return url.toString();
+    } catch {
+      // If URL parsing fails, return original link
+      return link;
+    }
+  };
+
   const iconInfo = getIconDisplay(tool.icon);
 
   return (
@@ -153,7 +176,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
         <Button
           variant="contained"
           startIcon={<OpenInNew />}
-          href={tool.tool_link}
+          href={getToolLinkWithToken(tool.tool_link)}
           target="_blank"
           rel="noopener noreferrer"
           sx={{

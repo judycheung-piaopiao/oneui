@@ -53,11 +53,10 @@ async def search_documents(
     """
     🔍 Semantic search over tool documentation
     
-    This endpoint searches through indexed documentation using AI embeddings,
-    allowing natural language queries in English or Chinese.
+    Searches indexed documentation using AI embeddings with natural language queries.
     
     **Examples:**
-    - "如何部署 strategy GUI" (Chinese)
+    - "how to deploy strategy GUI"
     - "troubleshooting RKV connection"
     - "eye service configuration"
     - "authentication setup"
